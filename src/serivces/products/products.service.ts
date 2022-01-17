@@ -7,9 +7,10 @@ export class ProductsService {
   private products: Product[] = [
     {
       id: 1,
-      name: 'Agua embotellada ciel',
-      description: 'Agua purificada de 1 litro',
-      price: 20,
+      name: 'Torta de chorizo',
+      description:
+        'Torta de chorizo de malpaso con repollo, cebolla, jitomate, aguacate y chile',
+      price: 40,
       stock: 200,
       image: null,
       deleted: false,
@@ -32,7 +33,7 @@ export class ProductsService {
     return this.products;
   }
   findOne(id: number) {
-    return this.products.find((r) => r.id === id);
+    return this.products.find((r) => r.id == id);
   }
   create(payload: any) {
     this.counterId += 1;
@@ -46,15 +47,12 @@ export class ProductsService {
   update(id: number, payload: any) {
     const product = this.findOne(id);
     if (product) {
-      const updateProduct = Object.assign(product, payload);
-      this.products = this.products.filter((r) => r.id !== id);
-      this.products.push(updateProduct);
-      return updateProduct;
+      return Object.assign(product, payload);
     }
     return false;
   }
   delete(id: number) {
-    this.products = this.products.filter((r) => r.id !== id);
+    this.products = this.products.filter((r) => Number(r.id) !== Number(id));
     return id;
   }
 }
